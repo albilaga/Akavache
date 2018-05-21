@@ -102,6 +102,19 @@ Toaster toaster;
 BlobCache.UserAccount.GetObject<Toaster>("toaster")
     .Subscribe(x => toaster = x, ex => Console.WriteLine("No Key!"));
 ```
+### Linker for Xamarin
+For Xamarin.iOS you need to add these code somewhere in your code to make sure it is not linked by linker. It is also good for Xamarin.Android to also put it if you using Link All
+
+```cs
+public static class LinkerPreserve
+{
+  static LinkerPreserve()
+  {
+    var persistentName = typeof(SQLitePersistentBlobCache).FullName;
+    var encryptedName = typeof(SQLiteEncryptedBlobCache).FullName;
+    }
+}
+```
 
 ### Handling Errors
 
